@@ -35,9 +35,27 @@ options.add_argument('accept-language=en-US,en;q=0.9,es;q=0.8')
 options.add_argument("--disable-blink-features=AutomationControlled")
 
 mapping = [
-                        {'name':'Sigiriya', 'target_prompt':'Historical explanation'},
-                        {'name':'Yala', 'target_prompt':'Importance and uniqueness'},
-                        # {'url':'https://www.acemedicalinc.com/cdn/shop/files/Standard-wheelchair.png?v=1727822846&width=550', 'item_name':'Standard Wheelchair', 'listed_name':'Standard Wheelchair', 'city':'honolulu', 'category_name':'wheelchair'}
+            {'name':'Sigiriya', 'target_prompt':'Historical explanation'},
+            {'name':'Yala', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Hurulu Eco Park', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Polonnaruwa Gal Viharaya, Museum & Kingdom', 'target_prompt':'Historical explanation'},
+            {'name':'Udawalawa', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Mirissa', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Jethawanaya', 'target_prompt':'Historical explanation'},
+            {'name':'Horton Plains', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Wilpattu', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Buduruwagala', 'target_prompt':'Historical explanation'},
+            {'name':'Sinharaja Conservation Forest', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Badulla Haputhale', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Galle', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Jaffna Fort', 'target_prompt':'Historical explanation'},
+            {'name':'Minneriya', 'target_prompt':'Historical explanation'},
+            {'name':'Ritigala Forest', 'target_prompt':'Historical explanation'},
+            {'name':'Udawattakele Conservation Forest', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Bundala', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Kumana', 'target_prompt':'Importance and uniqueness'},
+            {'name':'Galoya', 'target_prompt':'Historical explanation'},
+            {'name':'Pigeon Island', 'target_prompt':'Importance and uniqueness'},
         ]
 
 url='https://www.perplexity.ai/'

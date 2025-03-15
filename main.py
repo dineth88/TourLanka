@@ -25,7 +25,7 @@ def generate_rag_prompt(query, context):
                 have been provided may contain reference numbers along with the text. 
                 Remove them and pass the output. 
 
-                If the context is not available as a location, then process the answer by yourself knowledge.. 
+                If the answer for a certain prompt is not available in the context, then process the answer by yourself knowledge. 
                 You are providing answers for tourists. Make the content more attractive 
                 for them to read. Ensure to respond in complete sentences, be comprehensive, 
                 and structure the response properly. Always state the whole answer as much as possible. 
@@ -33,10 +33,10 @@ def generate_rag_prompt(query, context):
                 Also, remove unnecessary symbols from the answer. You have provided data 
                 in JSON format as {{'location': 'location name', 'historical data': 'historical context'}}.
 
-                Abd user entering question. 
+                And user entering question. 
                 QUESTION: '{query}'
                 CONTEXT: '{context}'
-                Provide answer by going through contexGigiriyast
+                Provide answer by going through context
                 ANSWER: 
             """).format(query=query, context=context)
     
