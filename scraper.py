@@ -59,7 +59,7 @@ mapping = [
         ]
 
 url='https://www.perplexity.ai/'
-count = 0
+count = 1
 context = ''
 print('========================= Historical Data ========================')
 
@@ -81,24 +81,68 @@ except:
 wait = WebDriverWait(driver, 40)
 
 for map_item in mapping:
+
+    if(count%3==0):
+        # Capturing info
+        try:
+            time.sleep(15)
+            # answer_context = driver.find_elements(By.XPATH, '//p[@class="my-0"]')
+            answer_context = driver.find_elements(By.XPATH, '//span[contains(@class, "token")]')
+
+            # Extract text and join
+            context = "".join([answer.text.replace('\\', '') for answer in answer_context])
+
+            msg.good("Answer captured successfully")
+        except Exception as e:
+            print(e)
+            print(traceback.format_exc())
+
+        try:
+            driver.refresh()
+            time.sleep(10)
+        except:
+            traceback.print_exc()
+            print(traceback.format_exc())
+            pass
+        
+        # driver = Driver(uc=True, headless=False)
+        # driver.maximize_window()
+        # try:
+        #     for i in range (0, 6):
+        #         try:
+        #             driver.get(url)
+        #             time.sleep(20)
+        #             prompt_input = driver.find_element(By.XPATH, '//textarea[@placeholder="Ask anything..."]')
+        #             break
+        #         except:
+        #             print("Issue")
+        #             pass
+        # except:
+        #     traceback.print_exc()
+
     print(f'========================= {map_item["name"]} ========================')
 
     #prompt submission
     try:
         time.sleep(30)
-        if(count==0):
+        if(count==1):
             prompt_input = driver.find_element(By.XPATH, '//textarea[@placeholder="Ask anything..."]')
         else:
             prompt_input = driver.find_element(By.XPATH, '//textarea[@placeholder="Ask follow-up"]')
-        prompt_input.send_keys(f"I need information about some Sri Lankan travel location to put into my blog website. Provide me nearly 1000 words about {map_item['target_prompt']} of {map_item['name']}. State the whole contents in json format as 'location':'{map_item['name']}',historical data: {map_item['target_prompt']} format. Only provide the json data answer by restricting to the given format for me. Do not add any partitions or topic to divide to historical data into parts like importance, early history etc. Just state the whole answer like one paragraph inside historical data.")
+        prompt_input.send_keys(f"I need information about a Sri Lankan travel location to put into my blog website. Provide me nearly 1000 words about {map_item['target_prompt']} of {map_item['name']}. State the whole contents in json format as 'location':'{map_item['name']}',historical data: {map_item['target_prompt']} format. Only provide the json data answer by restricting to the given format for me. Do not add any partitions or topic to divide to historical data into parts like importance, early history etc. Just state the whole answer like one paragraph inside historical data.")
         time.sleep(10)
     except:
-        traceback.print_exc()
-        print(traceback.format_exc())
-        pass 
+        try:
+            prompt_input = driver.find_element(By.XPATH, '//textarea[@placeholder="Ask follow-up"]')
+            prompt_input.send_keys(f"I need information about a Sri Lankan travel location to put into my blog website. Provide me nearly 1000 words about {map_item['target_prompt']} of {map_item['name']}. State the whole contents in json format as 'location':'{map_item['name']}',historical data: {map_item['target_prompt']} format. Only provide the json data answer by restricting to the given format for me. Do not add any partitions or topic to divide to historical data into parts like importance, early history etc. Just state the whole answer like one paragraph inside historical data.")
+            time.sleep(10)
+        except:
+            traceback.print_exc()
+            print(traceback.format_exc())
+            pass 
 
     try:
-        if(count==0):
+        if(count==1):
             popup_close = wait.until(EC.presence_of_all_elements_located((By.XPATH, '//button[@class="focus-visible:bg-offsetPlus dark:focus-visible:bg-offsetPlusDark md:hover:bg-offsetPlus text-textOff dark:text-textOffDark md:hover:text-textMain dark:md:hover:bg-offsetPlusDark  dark:md:hover:text-textMainDark font-sans focus:outline-none outline-none outline-transparent transition duration-300 ease-out font-sans  select-none items-center relative group/button  justify-center text-center items-center rounded-full cursor-pointer active:scale-[0.97] active:duration-150 active:ease-outExpo origin-center whitespace-nowrap inline-flex text-sm h-8 aspect-square"]')))
             popup_close[2].click()
     except:
@@ -117,19 +161,7 @@ for map_item in mapping:
      
     count+=1 
 
-# Capturing info
-try:
-    time.sleep(15)
-    # answer_context = driver.find_elements(By.XPATH, '//p[@class="my-0"]')
-    answer_context = driver.find_elements(By.XPATH, '//span[contains(@class, "token")]')
 
-    # Extract text and join
-    context = "".join([answer.text.replace('\\', '') for answer in answer_context])
-
-    msg.good("Answer captured successfully")
-except Exception as e:
-    print(e)
-    print(traceback.format_exc())
 
 formatted_data = "[" + context.replace("}{", "},{") + "]"  # Fix JSON by adding commas between objects
 
