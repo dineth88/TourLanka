@@ -83,20 +83,6 @@ wait = WebDriverWait(driver, 40)
 for map_item in mapping:
 
     if(count%3==0):
-        # Capturing info
-        try:
-            time.sleep(15)
-            # answer_context = driver.find_elements(By.XPATH, '//p[@class="my-0"]')
-            answer_context = driver.find_elements(By.XPATH, '//span[contains(@class, "token")]')
-
-            # Extract text and join
-            context = "".join([answer.text.replace('\\', '') for answer in answer_context])
-
-            msg.good("Answer captured successfully")
-        except Exception as e:
-            print(e)
-            print(traceback.format_exc())
-
         try:
             driver.refresh()
             time.sleep(10)
@@ -161,7 +147,19 @@ for map_item in mapping:
      
     count+=1 
 
+# Capturing info
+try:
+    time.sleep(15)
+    # answer_context = driver.find_elements(By.XPATH, '//p[@class="my-0"]')
+    answer_context = driver.find_elements(By.XPATH, '//span[contains(@class, "token")]')
 
+    # Extract text and join
+    context = "".join([answer.text.replace('\\', '') for answer in answer_context])
+
+    msg.good("Answer captured successfully")
+except Exception as e:
+    print(e)
+    print(traceback.format_exc())
 
 formatted_data = "[" + context.replace("}{", "},{") + "]"  # Fix JSON by adding commas between objects
 
