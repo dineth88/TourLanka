@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Input } from "./components/Input";
 import { Button } from "./components/Button";
 import { Card, CardContent } from "./components/Card";
-
+import { Send } from 'lucide-react';
+import { AnimatedBackground } from 'animated-backgrounds';
 
 export default function App() {
   const [messages, setMessages] = useState([]);
@@ -32,23 +33,27 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <Card className="w-full max-w-md shadow-lg font-sans">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+      <AnimatedBackground animationName="rainbowWaves" 
+       blendMode="multiply " />
+      <Card className="w-full max-w-2xl shadow-lg font-sans">
         <CardContent className="p-4 space-y-4 h-96 overflow-y-auto border-b">
           {messages.map((msg, index) => (
-            <div key={index} className={`p-2 rounded-lg max-w-xs ${msg.sender === "user" ? "bg-blue-500 text-white self-end ml-auto" : "bg-gray-200 text-black self-start"}`}>
+            <div key={index} className={`p-2 rounded-lg max-w-md ${msg.sender === "user" ? "bg-gray-900 text-white self-end ml-auto" : "bg-gray-200 text-black self-start"}`}>
               {msg.text}
             </div>
           ))}
         </CardContent>
-        <div className="flex p-4 space-x-2 text-gray-900">
+        <div className="flex p-4 space-x-2 text-gray-800">
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Type a message..."
+            placeholder="Ask Tourlanka..."
             className="flex-1"
           />
-          <Button onClick={sendMessage}>Send</Button>
+          <Button onClick={sendMessage}>
+            <Send color="#ffffff" />
+          </Button>
         </div>
       </Card>
     </div>

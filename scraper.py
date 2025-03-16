@@ -123,14 +123,27 @@ for map_item in mapping:
             prompt_input.send_keys(f"I need information about a Sri Lankan travel location to put into my blog website. Provide me nearly 1000 words about {map_item['target_prompt']} of {map_item['name']}. State the whole contents in json format as 'location':'{map_item['name']}',historical data: {map_item['target_prompt']} format. Only provide the json data answer by restricting to the given format for me. Do not add any partitions or topic to divide to historical data into parts like importance, early history etc. Just state the whole answer like one paragraph inside historical data.")
             time.sleep(10)
         except:
-            traceback.print_exc()
-            print(traceback.format_exc())
-            pass 
+            try:
+                popup_close = wait.until(EC.presence_of_element_located((By.XPATH, '//button[@data-testid="close-modal"]'))).click()
+                time.sleep(5)
+                prompt_input = driver.find_element(By.XPATH, '//textarea[@placeholder="Ask follow-up"]')
+                prompt_input.send_keys(f"I need information about a Sri Lankan travel location to put into my blog website. Provide me nearly 1000 words about {map_item['target_prompt']} of {map_item['name']}. State the whole contents in json format as 'location':'{map_item['name']}',historical data: {map_item['target_prompt']} format. Only provide the json data answer by restricting to the given format for me. Do not add any partitions or topic to divide to historical data into parts like importance, early history etc. Just state the whole answer like one paragraph inside historical data.")
+                time.sleep(10)
+            except:
+                try:
+                    driver.refresh()
+                    time.sleep(10)
+                    prompt_input = driver.find_element(By.XPATH, '//textarea[@placeholder="Ask follow-up"]')
+                    prompt_input.send_keys(f"I need information about a Sri Lankan travel location to put into my blog website. Provide me nearly 1000 words about {map_item['target_prompt']} of {map_item['name']}. State the whole contents in json format as 'location':'{map_item['name']}',historical data: {map_item['target_prompt']} format. Only provide the json data answer by restricting to the given format for me. Do not add any partitions or topic to divide to historical data into parts like importance, early history etc. Just state the whole answer like one paragraph inside historical data.")
+                    time.sleep(10)
+                except:
+                    traceback.print_exc()
+                    print(traceback.format_exc())
+                    pass  
 
     try:
         if(count==1):
-            popup_close = wait.until(EC.presence_of_all_elements_located((By.XPATH, '//button[@class="focus-visible:bg-offsetPlus dark:focus-visible:bg-offsetPlusDark md:hover:bg-offsetPlus text-textOff dark:text-textOffDark md:hover:text-textMain dark:md:hover:bg-offsetPlusDark  dark:md:hover:text-textMainDark font-sans focus:outline-none outline-none outline-transparent transition duration-300 ease-out font-sans  select-none items-center relative group/button  justify-center text-center items-center rounded-full cursor-pointer active:scale-[0.97] active:duration-150 active:ease-outExpo origin-center whitespace-nowrap inline-flex text-sm h-8 aspect-square"]')))
-            popup_close[2].click()
+            popup_close = wait.until(EC.presence_of_element_located((By.XPATH, '//div[@class="absolute right-0 top-0"]//button'))).click()
     except:
         traceback.print_exc()
         print(traceback.format_exc())
@@ -172,8 +185,6 @@ formatted_result = [
     {"location": item["location"], "historicalData": item["historical data"]}
     for item in parsed_data
 ]
-
-
 
 # Save to JSON file
 json_file = "location_data.json"
