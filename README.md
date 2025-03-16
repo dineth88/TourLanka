@@ -27,7 +27,7 @@ TourLanka is a Retrieval-Augmented Generation (RAG) chatbot built to provide sch
 - Python 3.8+
 - Node.js and npm
 
-### Backend Setup (FastAPI)
+### Application Setup 
 
 1. Clone the repository:
    ```bash
