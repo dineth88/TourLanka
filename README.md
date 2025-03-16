@@ -56,3 +56,4 @@ TourLanka is a Retrieval-Augmented Generation (RAG) chatbot built to provide sch
    uvicorn main:app
    cd Frontend
    npm run dev
+![Image](https://github.com/user-attachments/assets/cab2d56d-c049-4fbe-8788-ebf8b83faa83)
