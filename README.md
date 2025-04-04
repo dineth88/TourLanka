@@ -12,7 +12,7 @@ TourLanka is a Retrieval-Augmented Generation (RAG) chatbot built to provide sch
 - Embedding generation with Huggingface’s "sentence-transformers/all-MiniLM-L6-v2" model.
 - Stores and retrieves knowledge in ChromaDB for efficient similarity search.
 - Powered by Gemini 2.0-flash LLM for context-based query response.
-- We have used top 20 Sri Lanka tourist destinations stated By SLTDA statics 2023.
+- We have used top 20 Sri Lanka tourist destinations' info which stated By SLTDA statics 2023.
   (https://www.sltda.gov.lk/en)
 
 ## Technologies Used
